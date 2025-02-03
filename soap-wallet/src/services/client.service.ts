@@ -18,7 +18,7 @@ export class ClientService {
     if (existingClientByDocument) {
       return {
         success: false,
-        cod_error: '02',
+        cod_error: '01',
         message_error: 'El documento ya está registrado',
       };
     }
@@ -53,7 +53,7 @@ export class ClientService {
     return {
       success: true,
       cod_error: '00',
-      clientId : savedClient.id.toString(),
+      clientId : savedClient?.id?.toString(),
       message_error: 'Cliente registrado exitosamente',
       data: clientData,
     };

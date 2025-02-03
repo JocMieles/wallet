@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { SoapService } from 'src/services/soap.service';
+import { SoapService } from '../services/soap.service';
 
 @Controller('clients')
 export class ClientController {

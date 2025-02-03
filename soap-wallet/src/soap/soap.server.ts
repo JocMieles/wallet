@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import * as soap from 'soap';
 import * as http from 'http';
-import { ClientService } from 'src/services/client.service';
-import { WalletService } from 'src/services/wallet.service';
+import { ClientService } from '../services/client.service';
+import { WalletService } from '../services/wallet.service';
 import { wsdl } from './soap.wsdl';
 
 @Injectable()

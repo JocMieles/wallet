@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
-import { ClientRepository } from 'src/repositories/client.repository';
-import { WalletRepository } from 'src/repositories/wallet.repository';
+import { ClientRepository } from '../repositories/client.repository';
+import { WalletRepository } from '../repositories/wallet.repository';
 const nodemailer = require('nodemailer');
+const { ObjectId } = require('mongodb');
 
 @Injectable()
 export class WalletService {
@@ -11,12 +12,14 @@ export class WalletService {
   ) { }
 
   async createWallet(data: { clienteId: string; amount: number }) {
-    const existingWallet = await this.walletRepository.findByDocument(data.clienteId);
+    const clientId = new ObjectId(data.clienteId); // Convertir string a ObjectId
+
+    const existingWallet = await this.walletRepository.findByClientId(clientId);
     if (existingWallet) {
       return { success: false, cod_error: '01', message_error: 'La billetera ya existe' };
     }
 
-    const wallet = await this.walletRepository.create(data.clienteId);
+    const wallet = await this.walletRepository.create(clientId);
     return {
       success: true,
       cod_error: '00',
@@ -26,7 +29,7 @@ export class WalletService {
         saldo: wallet.balance,
       }
     };
-  }
+}
 
   async rechargeWallet(data: { document: string; phone: string; amount: number }) {
     const client = await this.clientRepository.findByDocument(data.document);
@@ -113,7 +116,7 @@ export class WalletService {
     console.log('Cliente encontrado:', cliente);
     // Simulamos la deducción del saldo (se debería aplicar en la billetera)
     if (+cliente?.token !== +data.token) {
-      return { success: false, cod_error: '02', message_error: 'Token incorrecto' };
+      return { success: false, cod_error: '04', message_error: 'Token incorrecto' };
     }
 
     await this.walletRepository.updateBalance(cliente.id, -cliente.amount);

@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Client } from 'src/models/client.model';
+import { Client } from '../models/client.model';
 
 @Injectable()
 export class ClientRepository {
   constructor(@InjectModel(Client.name) private clientModel: Model<Client>) {}
 
   async create(clientData: Partial<Client>): Promise<Client> {
-    return new this.clientModel(clientData).save();
+    return this.clientModel.create(clientData);
   }
 
   async findByDocument(document: string): Promise<Client | null> {
@@ -28,7 +28,13 @@ export class ClientRepository {
   }
 
   async updateValidationCode(clientId: string, token: string, session_id: string, amount: number): Promise<Client | null> {
-    return this.clientModel.findOneAndUpdate({ _id: clientId }, { token: token, session_id , amount }, { new: true });
+    return (
+      await this.clientModel.findOneAndUpdate(
+        { _id: clientId },
+        { token, session_id, amount },
+        { new: true }
+      )
+    ) || null;
   }
 
   async findBySessionId(session_id: string): Promise<Client | null> {

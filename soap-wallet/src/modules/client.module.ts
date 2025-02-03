@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ClientService } from '../services/client.service';
 import { ClientController } from '../controllers/client.controller';
 import { Client, ClientSchema } from '../models/client.model';
-import { ClientRepository } from 'src/repositories/client.repository';
+import { ClientRepository } from '../repositories/client.repository';
 
 @Module({
   imports: [
