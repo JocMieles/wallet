@@ -62,7 +62,7 @@ export class WalletService {
       return { success: false, cod_error: '03', message_error: 'Saldo insuficiente' };
     }
 
-    const token = randomInt(100000, 999999); // Generar código de 6 dígitos
+    const token = randomInt(100000, 999999);
     const session_id = `${Date.now()}-${client._id}`;
 
     this.clientRepository.updateValidationCode(client.id, token.toString(), session_id, data.amount);
@@ -100,6 +100,31 @@ export class WalletService {
       cod_error: '00',
       message_error: 'Codigo de session_id',
       data: { session_id }
+    };
+  }
+
+  async confirmPayment(data: { session_id: string; token: number }) {
+    // Simulamos la validación del token (debería guardarse en la BD)
+    const cliente = await this.clientRepository.findBySessionId(data.session_id);
+
+    if (!cliente) {
+      return { success: false, cod_error: '01', message_error: 'Sesión no encontrada' };
+    }
+    console.log('Cliente encontrado:', cliente);
+    // Simulamos la deducción del saldo (se debería aplicar en la billetera)
+    if (+cliente?.token !== +data.token) {
+      return { success: false, cod_error: '02', message_error: 'Token incorrecto' };
+    }
+
+    await this.walletRepository.updateBalance(cliente.id, -cliente.amount);
+
+    await this.clientRepository.updateValidationCode(cliente.id, "", "", 0);
+
+    return {
+      success: true,
+      cod_error: '00',
+      message_error: 'Pago confirmado',
+      data: { session_id: data.session_id, estado: 'Pago realizado' }
     };
   }
 

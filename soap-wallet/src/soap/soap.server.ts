@@ -101,6 +101,29 @@ export class SoapServer {
               });
             }
           },
+          confirmPayment: async (args: any, callback: any) => {
+            try {
+              console.log("Solicitud SOAP - Confirmación de pago:", args);
+              const response = await this.walletService.confirmPayment(args);
+
+              if (!response.success) {
+                return callback(null, response);
+              }
+
+              callback(null, { 
+                success: true, 
+                cod_error: '00', 
+                message_error: 'Pago confirmado exitosamente',
+              });
+            } catch (error) {
+              console.error('Error SOAP:', error);
+              callback({
+                success: false,
+                cod_error: '99',
+                message_error: 'Error interno del servidor',
+              });
+            }
+          },
 
         },
       },
