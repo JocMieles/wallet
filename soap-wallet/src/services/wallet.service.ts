@@ -128,4 +128,26 @@ export class WalletService {
     };
   }
 
+  async checkBalance(data: { document: string; phone: string }) {
+    const client = await this.clientRepository.findByDocument(data.document);
+
+    if (!client || client.phone !== data.phone) {
+      return { success: false, cod_error: '02', message_error: 'Cliente no encontrado o el teléfono no coincide' };
+    }
+
+    const wallet = await this.walletRepository.findByClientId(client.id);
+
+    if (!wallet) {
+      return { success: false, cod_error: '03', message_error: 'Billetera no encontrada' };
+    }
+
+    return {
+      success: true,
+      cod_error: '00',
+      message_error: 'Consulta de saldo exitosa',
+      data: {
+        saldo: wallet.balance
+      }
+    };
+  }
 }

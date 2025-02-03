@@ -124,7 +124,30 @@ export class SoapServer {
               });
             }
           },
+          checkBalance: async (args: any, callback: any) => {
+            try {
+              console.log("Solicitud SOAP - Consulta de saldo:", args);
+              const response = await this.walletService.checkBalance(args);
 
+              if (!response.success) {
+                return callback(null, response);
+              }
+
+              callback(null, { 
+                success: true, 
+                cod_error: '00', 
+                message_error: 'Saldo consultado exitosamente',
+                data: response.data,
+              });
+            } catch (error) {
+              console.error('Error SOAP:', error);
+              callback({
+                success: false,
+                cod_error: '99',
+                message_error: 'Error interno del servidor',
+              });
+            }
+          },
         },
       },
     };
