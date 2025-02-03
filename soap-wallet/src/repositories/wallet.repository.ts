@@ -26,5 +26,8 @@ export class WalletRepository {
     return this.walletModel.findOneAndUpdate({ clientId: clientId }, { $inc: { balance: amount } }, { new: true });
   }
 
+  async findByClientId(clientId: string): Promise<Wallet | null> {
+    return this.walletModel.findOne({ clientId }).exec();
+  }
 
 }

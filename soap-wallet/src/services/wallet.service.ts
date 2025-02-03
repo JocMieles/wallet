@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { randomInt } from 'crypto';
 import { ClientRepository } from 'src/repositories/client.repository';
 import { WalletRepository } from 'src/repositories/wallet.repository';
+const nodemailer = require('nodemailer');
 
 @Injectable()
 export class WalletService {
@@ -44,6 +46,60 @@ export class WalletService {
       data: {
         saldo: wallet?.balance
       }
+    };
+  }
+
+  async pay(data: { document: string; phone: string; amount: number }) {
+    const client = await this.clientRepository.findByDocumentAndPhone(data.document, data.phone);
+
+    if (!client || client.phone !== data.phone) {
+      return { success: false, cod_error: '02', message_error: 'Cliente no encontrado, el teléfono o el documento no coincide' };
+    }
+
+    const wallet = await this.walletRepository.findByClientId(client.id);
+
+    if (!wallet || wallet.balance < data.amount) {
+      return { success: false, cod_error: '03', message_error: 'Saldo insuficiente' };
+    }
+
+    const token = randomInt(100000, 999999); // Generar código de 6 dígitos
+    const session_id = `${Date.now()}-${client._id}`;
+
+    this.clientRepository.updateValidationCode(client.id, token.toString(), session_id, data.amount);
+
+    console.log(process.env.USER_GMAIL)
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: process.env.USER_GMAIL,
+        pass: process.env.PASS,
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        refreshToken: process.env.REFRESH_TOKEN
+      }
+    });
+
+    const mailOptions = {
+      from: process.env.USER,
+      to: client.email,
+      subject: 'Código de pago para confirmar compra.',
+      text: 'El token para su confirmación de compra es: ' + token
+    };
+
+    await transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log('Correo enviado: ' + info.response);
+      }
+    });
+
+    return {
+      success: true,
+      cod_error: '00',
+      message_error: 'Codigo de session_id',
+      data: { session_id }
     };
   }
 

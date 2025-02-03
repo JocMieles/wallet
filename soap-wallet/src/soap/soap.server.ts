@@ -77,6 +77,30 @@ export class SoapServer {
               });
             }
           },
+          pay: async (args: any, callback: any) => {
+            try {
+              console.log("Solicitud SOAP - Pago:", args);
+              const response = await this.walletService.pay(args);
+
+              if (!response.success) {
+                return callback(null, response);
+              }
+
+              callback(null, { 
+                success: true, 
+                cod_error: '00', 
+                message_error: 'Saldo suficiente, por favor confirma el pago con el codigo enviado al correo y el session_id',
+                data: {message: response.message_error, session_id: response?.data?.session_id},
+              });
+            } catch (error) {
+              console.error('Error SOAP:', error);
+              callback({
+                success: false,
+                cod_error: '99',
+                message_error: 'Error interno del servidor',
+              });
+            }
+          },
 
         },
       },
