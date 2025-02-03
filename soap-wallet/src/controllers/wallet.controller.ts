@@ -9,4 +9,8 @@ export class WalletController {
     return this.walletService.createWallet(data);
   }
 
+  async rechargeWallet(data: { document: string; phone: string; amount: number }) {
+    return this.walletService.rechargeWallet(data);
+  }
+
 }

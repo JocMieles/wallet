@@ -18,7 +18,6 @@ export class SoapServer {
         WalletPort: {
           registerClient: async (args: any, callback: any) => {
             try {
-              // Registrar el cliente
               const clientResponse = await this.clientService.registerClient(args);
               
               if (!clientResponse.success) {
@@ -27,7 +26,6 @@ export class SoapServer {
 
               console.log('Cliente registrado:', clientResponse);
 
-              // Crear la billetera para el cliente
               const walletResponse = await this.walletService.createWallet({
                 clienteId: clientResponse?.clientId,
                 amount: 0,
@@ -42,8 +40,33 @@ export class SoapServer {
                 cod_error: '00', 
                 message_error: 'Cliente registrado y billetera creada exitosamente',
                 data: {
-                  cliente: clientResponse.data, // ✅ Solo la data relevante del cliente
+                  cliente: clientResponse.data,
                 },
+              });
+            } catch (error) {
+              console.error('Error SOAP:', error);
+              callback({
+                success: false,
+                cod_error: '99',
+                message_error: 'Error interno del servidor',
+              });
+            }
+          },
+
+          rechargeWallet: async (args: any, callback: any) => {
+            try {
+              console.log("Solicitud SOAP - Recarga de billetera:", args);
+              const response = await this.walletService.rechargeWallet(args);
+
+              if (!response.success) {
+                return callback(null, response);
+              }
+
+              callback(null, { 
+                success: true, 
+                cod_error: '00', 
+                message_error: 'Billetera recargada exitosamente',
+                data: response.data,
               });
             } catch (error) {
               console.error('Error SOAP:', error);

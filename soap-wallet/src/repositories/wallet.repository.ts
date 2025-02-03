@@ -15,4 +15,16 @@ export class WalletRepository {
     return new this.walletModel({ clientId }).save();
   }
 
+  async updateBalance(clientId: string, amount: number): Promise<Wallet | null> {
+    console.log('document', clientId);
+    const wallet = await this.walletModel.findOne({ clientId: clientId });
+    console.log('wallet2', wallet);
+    if (!wallet) {
+      return null;
+    }
+
+    return this.walletModel.findOneAndUpdate({ clientId: clientId }, { $inc: { balance: amount } }, { new: true });
+  }
+
+
 }
