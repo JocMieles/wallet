@@ -15,8 +15,6 @@ npm run start
 MONGO_URI=mongodb://localhost:27017/soap_wallet
 PORT=4000
 HOST=localhost
-USER_GMAIL=pruebaspruebasmieles@gmail.com
-PASS=pruebasmieles1234
 ```
 
 ## Endpoints SOAP
