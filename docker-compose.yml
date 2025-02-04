@@ -21,11 +21,6 @@ services:
     restart: always
     ports:
       - "4000:4000"
-    # environment:
-    #   - SOAP_URL=http://soap-wallet:4000/wallet?wsdl
-    #   - PORT=3000
-    #   - JWT_SECRET_KEY=e8d5f0b7c72c3a1ad5b6a0fdb765e83a295fdb53e3a229d7e7e2e2c89b17b9aa
-    #   - HOST=localhost
     env_file:
       - ./soap-wallet/.env.example
     depends_on:
@@ -41,17 +36,6 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    # environment:
-    #   - POSTGRES_USER=postgres
-    #   - POSTGRES_PASSWORD=postgres
-    #   - MONGO_URI=mongodb://mongodb:27017/soap_wallet
-    #   - PORT=4000
-    #   - USER_GMAIL=pruebaspruebasmieles@gmail.com
-    #   - PASS=pruebasmieles1234
-    #   - CLIENT_ID=837965309380-sc46dv0vtn9rsqur5d9dbq6vjp7f751h.apps.googleusercontent.com
-    #   - CLIENT_SECRET=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
-    #   - REFRESH_TOKEN=1//05bSa97uWPTNZCgYIARAAGAUSNwF-L9IrVAC88SS0KM7tL7UIjqcAroQ29SFWfUohLh5KoZ8zLhFR44ua5E1QeGXu16defF2jxNc
-    #   - HOST=soap-wallet
     env_file:
       - ./rest-wallet/.env.example
     depends_on:
