@@ -9,7 +9,7 @@ import { ClientModule } from './client.module'; // ✅ Importar ClientModule
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Wallet.name, schema: WalletSchema }]),
-    ClientModule, // ✅ Agregamos ClientModule aquí
+    ClientModule,
   ],
   providers: [WalletService, WalletRepository],
   controllers: [WalletController],

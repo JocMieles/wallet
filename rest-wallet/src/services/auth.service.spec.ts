@@ -18,8 +18,8 @@ describe('AuthService', () => {
     authService = module.get<AuthService>(AuthService);
   });
 
-  describe('🟢 Generar Token', () => {
-    it('✅ Debe generar un token JWT válido', () => {
+  describe('Generar Token', () => {
+    it('Debe generar un token JWT válido', () => {
       const mockToken = 'mocked-jwt-token';
       (jwt.sign as jest.Mock).mockReturnValue(mockToken);
 
@@ -30,8 +30,8 @@ describe('AuthService', () => {
     });
   });
 
-  describe('🟢 Verificar Token', () => {
-    it('✅ Debe retornar true si el token es válido', () => {
+  describe('Verificar Token', () => {
+    it('Debe retornar true si el token es válido', () => {
       const validToken = 'valid-jwt-token';
       (jwt.verify as jest.Mock).mockReturnValue({});
 
@@ -41,7 +41,7 @@ describe('AuthService', () => {
       expect(result).toBe(true);
     });
 
-    it('❌ Debe retornar false si el token es inválido', () => {
+    it('Debe retornar false si el token es inválido', () => {
       const invalidToken = 'invalid-jwt-token';
       (jwt.verify as jest.Mock).mockImplementation(() => {
         throw new Error('Invalid token');

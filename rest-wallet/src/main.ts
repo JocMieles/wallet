@@ -5,8 +5,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors(); // Habilitar CORS por si se consume desde otro frontend
+  app.enableCors();
   await app.listen(process.env.PORT || 3000);
-  console.log('REST API corriendo en http://localhost:'+process.env.PORT);
+  console.log('REST API corriendo en http://'+process.env.HOST || 'localhost'+':'+process.env.PORT || '3000');
 }
 bootstrap();

@@ -18,8 +18,8 @@ describe('ClientController', () => {
     soapService = module.get(SoapService);
   });
 
-  describe('🟢 Registro de Cliente', () => {
-    it('✅ Debe llamar a SOAP con los datos correctos para registrar un cliente', async () => {
+  describe('Registro de Cliente', () => {
+    it('Debe llamar a SOAP con los datos correctos para registrar un cliente', async () => {
       const mockResponse = { success: true, cod_error: '00', message_error: 'Cliente registrado exitosamente' };
       soapService.callSoapMethod.mockResolvedValue(mockResponse);
 
@@ -36,7 +36,7 @@ describe('ClientController', () => {
       expect(result).toEqual(mockResponse);
     });
 
-    it('❌ Debe manejar errores si el servicio SOAP falla', async () => {
+    it('Debe manejar errores si el servicio SOAP falla', async () => {
       soapService.callSoapMethod.mockResolvedValue({ success: false, cod_error: '99', message_error: 'Error en SOAP' });
 
       const requestData = {

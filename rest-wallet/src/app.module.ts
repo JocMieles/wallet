@@ -10,7 +10,7 @@ import { WalletController } from './controllers/wallet.controller';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // Permite acceder a las variables en cualquier parte de la app
+      isGlobal: true,
     }),
   ],
   controllers: [AuthController, ClientController, WalletController],
@@ -20,7 +20,7 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .exclude({ path: 'auth/generateToken', method: RequestMethod.GET }) // Excluir endpoint de generación de token
+      .exclude({ path: 'auth/generateToken', method: RequestMethod.GET })
       .forRoutes(ClientController, WalletController);
   }
 }

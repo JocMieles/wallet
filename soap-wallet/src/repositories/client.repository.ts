@@ -11,7 +11,6 @@ export class ClientRepository {
     return this.clientModel.create(clientData);
   }
 
-
   async findByDocument(document: string): Promise<Client | null> {
     return this.clientModel.findOne({ document }).exec();
   }

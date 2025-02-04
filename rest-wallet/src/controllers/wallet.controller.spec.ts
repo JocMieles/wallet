@@ -18,8 +18,8 @@ describe('WalletController', () => {
     soapService = module.get(SoapService);
   });
 
-  describe('🟢 Recargar Billetera', () => {
-    it('✅ Debe llamar a SOAP con los datos correctos', async () => {
+  describe('Recargar Billetera', () => {
+    it('Debe llamar a SOAP con los datos correctos', async () => {
       const mockResponse = { success: true, cod_error: '00', message_error: 'Billetera recargada exitosamente' };
       soapService.callSoapMethod.mockResolvedValue(mockResponse);
 
@@ -30,8 +30,8 @@ describe('WalletController', () => {
     });
   });
 
-  describe('🟢 Realizar Pago', () => {
-    it('✅ Debe llamar a SOAP para realizar un pago', async () => {
+  describe('Realizar Pago', () => {
+    it('Debe llamar a SOAP para realizar un pago', async () => {
       const mockResponse = { success: true, cod_error: '00', message_error: 'Pago iniciado' };
       soapService.callSoapMethod.mockResolvedValue(mockResponse);
 
@@ -42,8 +42,8 @@ describe('WalletController', () => {
     });
   });
 
-  describe('🟢 Confirmar Pago', () => {
-    it('✅ Debe llamar a SOAP para confirmar un pago', async () => {
+  describe('Confirmar Pago', () => {
+    it('Debe llamar a SOAP para confirmar un pago', async () => {
       const mockResponse = { success: true, cod_error: '00', message_error: 'Pago confirmado' };
       soapService.callSoapMethod.mockResolvedValue(mockResponse);
 
@@ -54,8 +54,8 @@ describe('WalletController', () => {
     });
   });
 
-  describe('🟢 Consultar Saldo', () => {
-    it('✅ Debe llamar a SOAP para consultar el saldo', async () => {
+  describe('Consultar Saldo', () => {
+    it('Debe llamar a SOAP para consultar el saldo', async () => {
       const mockResponse = { success: true, cod_error: '00', message_error: 'Consulta de saldo exitosa', saldo: 100 };
       soapService.callSoapMethod.mockResolvedValue(mockResponse);
 

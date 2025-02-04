@@ -15,8 +15,8 @@ describe('AuthMiddleware', () => {
     nextFunction = jest.fn();
   });
 
-  describe('🟢 Token válido', () => {
-    it('✅ Debe permitir la solicitud si el token es válido', () => {
+  describe('Token válido', () => {
+    it('Debe permitir la solicitud si el token es válido', () => {
       mockRequest = {
         headers: { authorization: 'Bearer valid-token' },
       };
@@ -30,8 +30,8 @@ describe('AuthMiddleware', () => {
     });
   });
 
-  describe('❌ Token inválido o ausente', () => {
-    it('❌ Debe lanzar UnauthorizedException si el token no es proporcionado', () => {
+  describe('Token inválido o ausente', () => {
+    it('Debe lanzar UnauthorizedException si el token no es proporcionado', () => {
       mockRequest = { headers: {} };
 
       expect(() => authMiddleware.use(mockRequest, mockResponse, nextFunction))
@@ -41,7 +41,7 @@ describe('AuthMiddleware', () => {
       expect(nextFunction).not.toHaveBeenCalled();
     });
 
-    it('❌ Debe lanzar UnauthorizedException si el token es inválido', () => {
+    it('Debe lanzar UnauthorizedException si el token es inválido', () => {
       mockRequest = {
         headers: { authorization: 'Bearer invalid-token' },
       };

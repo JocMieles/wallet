@@ -10,7 +10,7 @@ describe('ClientRepository', () => {
 
   beforeEach(async () => {
     modelMock = {
-      create: jest.fn().mockImplementation((data) => Promise.resolve({ ...data, _id: '123' })), // ✅ Elimina `save`
+      create: jest.fn().mockImplementation((data) => Promise.resolve({ ...data, _id: '123' })),
       findOne: jest.fn().mockReturnValue({
         exec: jest.fn().mockResolvedValue(null),
       }),
@@ -38,10 +38,8 @@ describe('ClientRepository', () => {
 
     const result = await repository.create(mockClient);
 
-    // ✅ Comprobamos que la función `create` fue llamada correctamente
     expect(modelMock.create).toHaveBeenCalledWith(mockClient);
     
-    // ✅ Comprobamos que la respuesta contiene solo los datos esperados
     expect(result).toEqual(mockClient);
   });
 

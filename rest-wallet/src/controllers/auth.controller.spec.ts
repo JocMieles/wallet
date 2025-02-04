@@ -18,8 +18,8 @@ describe('AuthController', () => {
     authService = module.get(AuthService);
   });
 
-  describe('🟢 Generar Token', () => {
-    it('✅ Debe llamar a AuthService y retornar un token', () => {
+  describe('Generar Token', () => {
+    it('Debe llamar a AuthService y retornar un token', () => {
       const mockResponse = { success: true, token: 'mocked-jwt-token' };
       authService.generateToken.mockReturnValue(mockResponse);
 

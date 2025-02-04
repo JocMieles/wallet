@@ -10,7 +10,7 @@ describe('WalletRepository', () => {
 
   beforeEach(async () => {
     modelMock = {
-      create: jest.fn().mockImplementation((data) => Promise.resolve({ ...data, _id: 'wallet123', balance: 0 })), // ✅ Evita `save()`
+      create: jest.fn().mockImplementation((data) => Promise.resolve({ ...data, _id: 'wallet123', balance: 0 })),
       findOne: jest.fn().mockReturnValue({
         exec: jest.fn().mockResolvedValue(null),
       }),
@@ -36,10 +36,8 @@ describe('WalletRepository', () => {
 
     const result = await repository.create(mockWallet.clientId);
 
-    // ✅ Verificar que `create` se llame correctamente
     expect(modelMock.create).toHaveBeenCalledWith({ clientId: mockWallet.clientId });
 
-    // ✅ Verificar que la billetera creada tenga las propiedades correctas
     expect(result).toEqual(mockWallet);
   });
 

@@ -1,1 +1,11 @@
+db.wallets.find().pretty()
+use soap_wallet
+db.wallets.find().pretty()
+use soap_wallet
+db.wallets.find().pretty()
+db.clients.find().pretty()
+show collections
+use soap_wallet
+show collections
+use soap-wallet
 show dbs

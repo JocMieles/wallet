@@ -107,14 +107,14 @@ export class WalletService {
   }
 
   async confirmPayment(data: { session_id: string; token: number }) {
-    // Simulamos la validación del token (debería guardarse en la BD)
+
     const cliente = await this.clientRepository.findBySessionId(data.session_id);
 
     if (!cliente) {
       return { success: false, cod_error: '01', message_error: 'Sesión no encontrada' };
     }
     console.log('Cliente encontrado:', cliente);
-    // Simulamos la deducción del saldo (se debería aplicar en la billetera)
+
     if (+cliente?.token !== +data.token) {
       return { success: false, cod_error: '04', message_error: 'Token incorrecto' };
     }

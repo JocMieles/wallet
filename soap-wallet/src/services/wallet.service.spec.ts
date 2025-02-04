@@ -52,7 +52,6 @@ describe('WalletService', () => {
   it('debería fallar al crear una billetera si ya existe', async () => {
     const clientId = new ObjectId(123);
 
-    // Asegurar que se usa findByClientId en el mock
     walletRepositoryMock.findByClientId.mockResolvedValue({ clientId, balance: 0 });
 
     const result = await service.createWallet({ clienteId: clientId.toString(), amount: 0 });

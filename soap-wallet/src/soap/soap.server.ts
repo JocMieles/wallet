@@ -155,6 +155,6 @@ export class SoapServer {
     const server = http.createServer((req, res) => res.end("Servidor SOAP en ejecución"));
     soap.listen(server, '/wallet', service, wsdl);
 
-    server.listen(process.env.PORT, () => console.log('Servidor SOAP corriendo en http://soap-wallet:' + process.env.PORT + '/wallet?wsdl'));
+    server.listen(process.env.PORT, () => console.log('Servidor SOAP corriendo en http://' + process.env.HOST + ':' + process.env.PORT + '/wallet?wsdl'));
   }
 }
