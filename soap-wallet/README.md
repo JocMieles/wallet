@@ -17,9 +17,6 @@ PORT=4000
 HOST=localhost
 USER_GMAIL=pruebaspruebasmieles@gmail.com
 PASS=pruebasmieles1234
-<!-- CLIENT_ID=837965309380-sc46dv0vtn9rsqur5d9dbq6vjp7f751h.apps.googleusercontent.com
-CLIENT_SECRET=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
-REFRESH_TOKEN=1//05bSa97uWPTNZCgYIARAAGAUSNwF-L9IrVAC88SS0KM7tL7UIjqcAroQ29SFWfUohLh5KoZ8zLhFR44ua5E1QeGXu16defF2jxNc -->
 ```
 
 ## Endpoints SOAP
