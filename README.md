@@ -11,6 +11,7 @@ El **servicio REST** llama al **servicio SOAP**, y el **servicio SOAP** se conec
 - **Docker** para contenerización
 - **SOAP** y **REST** APIs
 - **JWT** para autenticación por Headers (pendiente de implementación en mejoras futuras)
+- **Jest** pruebas unitarias
 
 ## Instalación y Ejecución
 
@@ -40,6 +41,12 @@ Ejecutar cada servicio:
 ```sh
 cd soap-wallet && npm run start
 cd ../rest-wallet && npm run start
+```
+
+Pruebas unitarias:
+```sh
+cd soap-wallet && npm run test
+cd ../rest-wallet && npm run test
 ```
 
 ## Endpoints Principales
