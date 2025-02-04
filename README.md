@@ -28,7 +28,7 @@ Esto iniciará MongoDB, el servicio SOAP y el servicio REST automáticamente.
 
 #### **Pasos**
 ```sh
-git clone https://github.com/tu-repo/wallet.git
+git clone https://github.com/JocMieles/wallet.git
 cd wallet
 ```
 Instalar dependencias en cada servicio:
