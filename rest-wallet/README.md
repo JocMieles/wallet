@@ -15,7 +15,6 @@ npm run start
 ```env
 SOAP_URL=http://localhost:4000/wallet?wsdl
 PORT=3000
-JWT_SECRET_KEY=''
 HOST=localhost
 ```
 

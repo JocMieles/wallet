@@ -17,9 +17,6 @@ PORT=4000
 HOST=localhost
 USER_GMAIL=pruebaspruebasmieles@gmail.com
 PASS=pruebasmieles1234
-CLIENT_ID=''
-CLIENT_SECRET=''
-REFRESH_TOKEN=''
 ```
 
 ## Endpoints SOAP
