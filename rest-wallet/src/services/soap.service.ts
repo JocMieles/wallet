@@ -3,7 +3,7 @@ import * as soap from 'soap';
 
 @Injectable()
 export class SoapService {
-  private soapUrl = process.env.SOAP_URL || 'http://localhost:4000/wallet?wsdl';
+  private soapUrl = process.env.SOAP_URL || 'http://soap-wallet:4000/wallet?wsdl';
 
   async callSoapMethod(method: string, args: any) {
     try {

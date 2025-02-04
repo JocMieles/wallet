@@ -7,7 +7,7 @@ jest.mock('soap');
 describe('SoapService', () => {
   let soapService: SoapService;
   let mockClient: any;
-  const soapUrl = 'http://localhost:4000/wallet?wsdl';
+  const soapUrl = process.env.SOAP_URL || 'http://soap-wallet:4000/wallet?wsdl';
 
   beforeEach(async () => {
     process.env.SOAP_URL = soapUrl;

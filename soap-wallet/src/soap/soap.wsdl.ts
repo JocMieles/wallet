@@ -154,7 +154,7 @@ export const wsdl = `
     <!-- Servicio -->
     <service name="WalletService">
         <port name="WalletPort" binding="tns:WalletBinding">
-            <soap:address location="http://localhost:4000/wallet"/>
+            <soap:address location="http://soap-wallet:4000/wallet"/>
         </port>
     </service>
 </definitions>

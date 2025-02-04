@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb-data:/data/db
+    command: ["mongod", "--bind_ip", "0.0.0.0"] 
+    networks:
+      - wallet_backend-network
+
+  soap-wallet:
+    build:
+      context: ./soap-wallet
+      dockerfile: Dockerfile
+    container_name: soap-wallet
+    restart: always
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./soap-wallet/.env
+    depends_on:
+      - mongodb
+    networks:
+      - wallet_backend-network
+
+  rest-wallet:
+    build:
+      context: ./rest-wallet
+      dockerfile: Dockerfile
+    container_name: rest-wallet
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./rest-wallet/.env
+    depends_on:
+      - soap-wallet
+    networks:
+      - wallet_backend-network
+
+networks:
+  wallet_backend-network:
+    driver: bridge
